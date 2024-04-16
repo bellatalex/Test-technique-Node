@@ -2,8 +2,8 @@ import express, { Request, Response } from 'express';
 const app = express();
 
 const port = process.env.PORT || 3000;
-type NextFunction = (err?: any) => void;
-const master_token =
+type NextFunction = (err?: Error | undefined) => void;
+const masterToken =
   "8dJyzP1.:3Mbpr11y~8ZUdEY*E.m&LV?dCqT96U'H:-(I?!YGgyyuGgp2VawTJ!t'*Uw$ekuO`YeWoip~WPC/TFL&|qQXf$/W7'QVIPp0U9tnGPhuD'@GuEdZO/G^^Ect+q!enpn";
 
 app.get('/', (req: Request, res: Response) => {
@@ -11,8 +11,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 function authenticateToken(req: Request, res: Response, next: NextFunction) {
-  const token_header = req.headers['token'];
-  if (token_header == master_token) {
+  const tokenHeader = req.headers['token'];
+  if (tokenHeader == masterToken) {
     return next();
   }
   return res.status(401).json({ error: 'Unauthorized' });
@@ -23,9 +23,7 @@ app.get('/api/generate_json_bridge', authenticateToken, (req, res) => {
 });
 
 if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
+  app.listen(port, () => {});
 }
 
 export default app;

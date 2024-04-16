@@ -1,11 +1,11 @@
 import request from 'supertest';
 import app from '../src/index';
+import http from 'http';
 
-let server: any;
+let server: http.Server;
 
 beforeAll(done => {
   server = app.listen(3000, () => {
-    console.log('Test server running on port 3000');
     done();
   });
 });
@@ -13,7 +13,6 @@ beforeAll(done => {
 afterAll(done => {
   if (server) {
     server.close(() => {
-      console.log('Test server closed');
       done();
     });
   }
