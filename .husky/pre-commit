@@ -1,15 +1,11 @@
-#!/bin/bash
+#!/bin/sh
+FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g')
+[ -z "$FILES" ] && exit 0
 
-npx eslint --fix .
-MODIFIED_FILES=$(git diff --name-only)
-echo "$MODIFIED_FILES"
+# Prettify all selected files
+echo "$FILES" | xargs ./node_modules/.bin/prettier --ignore-unknown --write
 
-if [ -n "$MODIFIED_FILES" ]; then
-  npx prettier --write .
-  exit 1
-fi
-
-npm run build
-npm run test
+# Add back the modified/prettified files to staging
+echo "$FILES" | xargs git add
 
 exit 0
