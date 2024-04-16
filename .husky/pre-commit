@@ -1,6 +1,13 @@
 #!/bin/bash
 
 npx eslint --fix .
+MODIFIED_FILES=$(git diff --name-only)
+echo "$MODIFIED_FILES"
+
+if [ -n "$MODIFIED_FILES" ]; then
+  npx prettier --write .
+  exit 1
+fi
 
 npm run build
 npm run test
