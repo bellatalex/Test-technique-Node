@@ -1,0 +1,4 @@
+npx eslint --fix .
+npx prettier --write .
+npm run build
+npm run test
