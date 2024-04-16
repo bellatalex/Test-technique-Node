@@ -1,11 +1,6 @@
 #!/bin/bash
 
 npx eslint --fix .
-if [ -n "$MODIFIED_FILES" ]; then
-  npx prettier --write .
-  echo "Prettier modified files detected. Please run 'git add' manually after formatting."
-  exit 1
-fi
 
 npm run build
 npm run test
