@@ -11,17 +11,6 @@
     "pretest": "npm run build",
     "prepare": "husky"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts}": [
-      "eslint --fix .",
-      "prettier --write ."
-    ]
-  },
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node"
