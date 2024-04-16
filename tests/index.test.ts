@@ -32,11 +32,11 @@ describe('GET /api/generate_json_bridge', () => {
       .get('/api/generate_json_bridge')
       .set(
         'token',
-        "8dJyzP1.:3Mbpr11y~8ZUdEY*E.m&LV?dCqT96U'H:-(I?!YGgyyuGgp2VawTJ!t'*Uw$ekuO`YeWoip~WPC/TFL&|qQXf$/W7'QVIPp0U9tnGPhuD'@GuEdZO/G^^Ect+q!enpn"
+        '8dJyzP1.:3Mbpr11y~8ZUdEY*E.m&LV?dCqT96UH:-(I?!YGgyyuGgp2VawTJ!t*Uw$ekuO`YeWoip~WPC/TFL&|qQXf$/W7QVIPp0U9tnGPhu@GuEdZO/G^^Ect+q!enpn'
       );
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      message: "Accès autorisé à l'API sécurisée",
+      message: 'Accès autorisé à l\'API sécurisée',
     });
   });
 

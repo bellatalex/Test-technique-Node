@@ -4,13 +4,13 @@ const app = express();
 const port = process.env.PORT || 3000;
 type NextFunction = (err?: Error | undefined) => void;
 const masterToken =
-  "8dJyzP1.:3Mbpr11y~8ZUdEY*E.m&LV?dCqT96U'H:-(I?!YGgyyuGgp2VawTJ!t'*Uw$ekuO`YeWoip~WPC/TFL&|qQXf$/W7'QVIPp0U9tnGPhuD'@GuEdZO/G^^Ect+q!enpn";
+  '8dJyzP1.:3Mbpr11y~8ZUdEY*E.m&LV?dCqT96UH:-(I?!YGgyyuGgp2VawTJ!t*Uw$ekuO`YeWoip~WPC/TFL&|qQXf$/W7QVIPp0U9tnGPhu@GuEdZO/G^^Ect+q!enpn';
 
 app.get('/', (req: Request, res: Response) => {
   res.status(200).send('Hello World');
 });
 
-function authenticateToken(req: Request, res: Response, next: NextFunction) {
+function authenticateToken (req: Request, res: Response, next: NextFunction) {
   const tokenHeader = req.headers['token'];
   if (tokenHeader == masterToken) {
     return next();
@@ -19,7 +19,7 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
 }
 
 app.get('/api/generate_json_bridge', authenticateToken, (req, res) => {
-  res.status(200).json({ message: "Accès autorisé à l'API sécurisée" });
+  res.status(200).json({ message: 'Accès autorisé à l\'API sécurisée' });
 });
 
 if (require.main === module) {
