@@ -37,6 +37,12 @@ jobs:
       - name: Run Tests
         env:
           KEY: ${{ secrets.KEY }}
+          BRIDGE_VERSION: ${{ secrets.BRIDGE_VERSION }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          EMAIL: ${{ secrets.EMAIL }}
+          PASSWORD: ${{ secrets.PASSWORD }}
+          USER_UUID: ${{ secrets.USER_UUID }}
         run: npm test
 
       - name: Audit Dependencies
