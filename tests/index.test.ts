@@ -1,6 +1,10 @@
 import request from 'supertest';
 import app from '../src/index';
 import http from 'http';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const token = process.env.KEY || '';
 
 let server: http.Server;
 
@@ -30,10 +34,7 @@ describe('GET /api/generate_json_bridge', () => {
   it('should return 200 OK with message "Accès autorisé à la route generate_json_bridge"', async () => {
     const response = await request(app)
       .get('/api/generate_json_bridge')
-      .set(
-        'token',
-        '8dJyzP1.:3Mbpr11y~8ZUdEY*E.m&LV?dCqT96UH:-(I?!YGgyyuGgp2VawTJ!t*Uw$ekuO`YeWoip~WPC/TFL&|qQXf$/W7QVIPp0U9tnGPhu@GuEdZO/G^^Ect+q!enpn'
-      );
+      .set('token', token);
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
       message: 'Accès autorisé à la route generate_json_bridge',
@@ -49,7 +50,7 @@ describe('GET /api/generate_json_bridge', () => {
   it('should return 401 Unauthorized with invalid token', async () => {
     const response = await request(app)
       .get('/api/generate_json_bridge')
-      .set('token', 'invalid_token');
+      .set('token', 'invalid_token fbfgbdgbdfrfdgnbdrdg');
     expect(response.status).toBe(401);
     expect(response.body).toEqual({ error: 'Unauthorized' });
   });

@@ -35,6 +35,8 @@ jobs:
         run: npx prettier --check .
 
       - name: Run Tests
+        env:
+          KEY: ${{ secrets.KEY }}
         run: npm test
 
       - name: Audit Dependencies
