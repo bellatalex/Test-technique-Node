@@ -4,7 +4,6 @@ import http from 'http';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const token = process.env.KEY || '';
 
 let server: http.Server;
 
@@ -30,28 +29,42 @@ describe('GET /', () => {
   });
 });
 
-describe('GET /api/generate_json_bridge', () => {
-  it('should return 200 OK with message "Accès autorisé à la route generate_json_bridge"', async () => {
-    const response = await request(app)
-      .get('/api/generate_json_bridge')
-      .set('token', token);
-    expect(response.status).toBe(200);
-    expect(response.body).toEqual({
-      message: 'Accès autorisé à la route generate_json_bridge',
+describe('API Route Testing', () => {
+  describe('GET /', () => {
+    it('should return Hello World', async () => {
+      const res = await request(app).get('/');
+      expect(res.status).toBe(200);
+      expect(res.text).toBe('Hello World');
     });
   });
 
-  it('should return 401 Unauthorized without token', async () => {
-    const response = await request(app).get('/api/generate_json_bridge');
-    expect(response.status).toBe(401);
-    expect(response.body).toEqual({ error: 'Unauthorized' });
-  });
+  describe('POST /api/generate_json_bridge', () => {
+    const masterToken = process.env.KEY || '';
 
-  it('should return 401 Unauthorized with invalid token', async () => {
-    const response = await request(app)
-      .get('/api/generate_json_bridge')
-      .set('token', 'invalid_token fbfgbdgbdfrfdgnbdrdg');
-    expect(response.status).toBe(401);
-    expect(response.body).toEqual({ error: 'Unauthorized' });
+    it('should return 401 Unauthorized if token is not provided', async () => {
+      const res = await request(app).post('/api/generate_json_bridge');
+      expect(res.status).toBe(401);
+      expect(res.body).toEqual({ error: 'Unauthorized' });
+    });
+
+    it('should return 401 Unauthorized if token is incorrect', async () => {
+      const res = await request(app)
+        .post('/api/generate_json_bridge')
+        .set('token', 'incorrect_token');
+      expect(res.status).toBe(401);
+      expect(res.body).toEqual({ error: 'Unauthorized' });
+    });
+
+    it('should return 200 OK with correct data when provided with valid token', async () => {
+      const res = await request(app)
+        .post('/api/generate_json_bridge')
+        .set('token', masterToken);
+
+      expect(res.status).toBe(200);
+      expect(res.body).toHaveProperty('auth');
+      expect(res.body).toHaveProperty('items');
+      expect(res.body).toHaveProperty('accounts');
+      expect(res.body).toHaveProperty('transactions');
+    });
   });
 });
