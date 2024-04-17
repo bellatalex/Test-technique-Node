@@ -1,14 +1,15 @@
 import express, { Request, Response } from 'express';
+import dotenv from 'dotenv';
+// import { Bridge } from './bridge/bridge';
+
+dotenv.config();
+const masterToken = process.env.KEY || '';
+const port = process.env.PORT || 3000;
+
+// const bridgeInstance = new Bridge();
 const app = express();
 
-const port = process.env.PORT || 3000;
 type NextFunction = (err?: Error | undefined) => void;
-const masterToken =
-  '8dJyzP1.:3Mbpr11y~8ZUdEY*E.m&LV?dCqT96UH:-(I?!YGgyyuGgp2VawTJ!t*Uw$ekuO`YeWoip~WPC/TFL&|qQXf$/W7QVIPp0U9tnGPhu@GuEdZO/G^^Ect+q!enpn';
-
-app.get('/', (req: Request, res: Response) => {
-  res.status(200).send('Hello World');
-});
 
 function authenticateToken(req: Request, res: Response, next: NextFunction) {
   const tokenHeader = req.headers['token'];
@@ -17,6 +18,10 @@ function authenticateToken(req: Request, res: Response, next: NextFunction) {
   }
   return res.status(401).json({ error: 'Unauthorized' });
 }
+
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).send('Hello World');
+});
 
 app.get('/api/generate_json_bridge', authenticateToken, (req, res) => {
   res
