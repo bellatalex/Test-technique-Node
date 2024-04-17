@@ -27,7 +27,7 @@ describe('GET /', () => {
 });
 
 describe('GET /api/generate_json_bridge', () => {
-  it('should return 200 OK with message "Accès autorisé à l\'API sécurisée"', async () => {
+  it('should return 200 OK with message "Accès autorisé à la route generate_json_bridge"', async () => {
     const response = await request(app)
       .get('/api/generate_json_bridge')
       .set(
@@ -36,7 +36,7 @@ describe('GET /api/generate_json_bridge', () => {
       );
     expect(response.status).toBe(200);
     expect(response.body).toEqual({
-      message: 'Accès autorisé à l\'API sécurisée',
+      message: 'Accès autorisé à la route generate_json_bridge',
     });
   });
 

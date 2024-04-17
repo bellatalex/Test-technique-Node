@@ -10,7 +10,7 @@ app.get('/', (req: Request, res: Response) => {
   res.status(200).send('Hello World');
 });
 
-function authenticateToken (req: Request, res: Response, next: NextFunction) {
+function authenticateToken(req: Request, res: Response, next: NextFunction) {
   const tokenHeader = req.headers['token'];
   if (tokenHeader == masterToken) {
     return next();
@@ -19,7 +19,9 @@ function authenticateToken (req: Request, res: Response, next: NextFunction) {
 }
 
 app.get('/api/generate_json_bridge', authenticateToken, (req, res) => {
-  res.status(200).json({ message: 'Accès autorisé à l\'API sécurisée' });
+  res
+    .status(200)
+    .json({ message: 'Accès autorisé à la route generate_json_bridge' });
 });
 
 if (require.main === module) {
