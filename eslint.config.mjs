@@ -13,11 +13,11 @@ export default {
   },
   rules: {
     // Règles ESLint spécifiques
-    indent: ['error', 2],
-    quotes: ['error', 'single'],
-    semi: ['error', 'always'],
+    'indent': ['error', 2],
+    'quotes': ['error', 'single'],
+    'semi': ['error', 'always'],
     'no-console': 'error',
-    camelcase: 'error',
+    'camelcase': 'error',
     'comma-spacing': 'error',
     'no-trailing-spaces': 'error',
     'arrow-spacing': 'error',
