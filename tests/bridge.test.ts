@@ -1,4 +1,4 @@
-import { Bridge } from './bridge';
+import { Bridge } from '../src/bridge/bridge';
 
 const bridge = new Bridge();
 

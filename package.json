@@ -16,7 +16,12 @@
     "testEnvironment": "node"
   },
   "lint-staged": {
-    "prettier": "prettier --write ."
+    "**/*.ts": [
+      "eslint --fix .",
+      "eslint --max-warnings=0",
+      "jest --bail --coverage --findRelatedTests"
+    ],
+    "*.{js,ts,css,md,yml}": "prettier --write ."
   },
   "keywords": [],
   "author": "",

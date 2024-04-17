@@ -28,22 +28,11 @@ jobs:
       - name: Build
         run: npm run build --if-present
 
-#      - name: Check ESLint
-#        run: npx eslint .
+      - name: Check ESLint
+        run: npx eslint .
 
-#      - name: Check Prettier
-#        run: npx prettier --check .
-
-      - name: Run Tests
-        env:
-          KEY: ${{ secrets.KEY }}
-          BRIDGE_VERSION: ${{ secrets.BRIDGE_VERSION }}
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          EMAIL: ${{ secrets.EMAIL }}
-          PASSWORD: ${{ secrets.PASSWORD }}
-          USER_UUID: ${{ secrets.USER_UUID }}
-        run: npm test
+      - name: Check Prettier
+        run: npx prettier --check .
 
       - name: Audit Dependencies
         run: npm audit --audit-level=high

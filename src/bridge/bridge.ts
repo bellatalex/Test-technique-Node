@@ -98,8 +98,6 @@ export class Bridge {
 
       return response.body;
     } catch (error) {
-      console.error(error);
-      console.error(error);
       throw new Error('Failed to fetch transactions');
     }
   }
