@@ -26,7 +26,7 @@ interface Account {
   is_pro: boolean;
 }
 
-interface AccountsResponse {
+export interface AccountsResponse {
   resources: Account[];
   generated_at: string;
   pagination: Pagination;
@@ -48,17 +48,17 @@ interface Pagination {
   next_uri: string | null;
 }
 
-interface Item {
+export interface ItemResponse {
   resources: Resource[];
   generated_at: string;
   pagination: Pagination;
 }
 
-interface AuthResponse {
+export interface AuthResponse {
   access_token: string;
   expires_at: string;
 }
-interface TransactionResponse {
+export interface TransactionResponse {
   resources: Transaction[];
   generated_at: string;
   pagination: {
@@ -101,7 +101,7 @@ export class Bridge {
       throw new Error('Failed to fetch transactions');
     }
   }
-  public async getItems(token: string): Promise<Item> {
+  public async getItems(token: string): Promise<ItemResponse> {
     try {
       const response = await superagent
         .get('https://api.bridgeapi.io/v2/items')
